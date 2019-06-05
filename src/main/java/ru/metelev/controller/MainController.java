@@ -33,13 +33,12 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model  model){
-        Iterable<Message> messages = messageRepo.findAll();
-
+    public String main(
+            @AuthenticationPrincipal User user,
+            @RequestParam(required = false, defaultValue = "") String filter, Model  model){
+        Iterable<Message> messages = messageRepo.findByAuthor(user);
         if(filter!=null&&!filter.isEmpty()){
-            messages = messageRepo.findByTag(filter);
-        } else{
-            messages = messageRepo.findAll();
+            messages = messageRepo.findByTagAfterAndAuthor(filter,user);
         }
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter);
@@ -70,7 +69,7 @@ public class MainController {
         }
 
         messageRepo.save(message);
-        Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Message> messages = messageRepo.findByAuthor(user);
         model.put("messages",messages);
         return "main";
     }
