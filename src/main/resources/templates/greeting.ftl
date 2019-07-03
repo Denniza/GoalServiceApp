@@ -2,5 +2,5 @@
 
 <@c.page>
 <h5>Hello, guest</h5>
-    <div>This is a GoalService, witch will help you to achieve your life goals.</div>
+    <div>This is a Peeper, clone of Tweeter, where you can make your peep which will see other people</div>
 </@c.page>
