@@ -1,16 +1,16 @@
 package ru.metelev.repos;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import ru.metelev.domain.Message;
 import ru.metelev.domain.User;
 
-import java.util.List;
-
 public interface MessageRepo extends CrudRepository<Message,Long> {
 
-    List<Message> findByTag(String tag);
+    Page<Message> findAll(Pageable pageable);
 
-    List<Message> findByAuthor(User user);
+    Page<Message> findByTag(String tag, Pageable pageable);
 
-    List<Message> findByTagAfterAndAuthor(String tag, User user);
+    Page<Message> findByAuthor(User user, Pageable pageable);
 }
