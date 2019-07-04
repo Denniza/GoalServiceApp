@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
         user.setActive(true);
-        user.setRoles(Collections.singleton(Role.ADMIN));
+        user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -60,11 +60,11 @@ public class UserService implements UserDetailsService {
         if(!StringUtils.isEmpty(user.getEmail())){
             String message = String.format(
                     "Hello, %s! \n" +
-                            "Welcome to GoalService. Please, visit next link http://localhost:8080/activate/%s",
+                            "Welcome to Peeper. Please, visit next link http://localhost:8080/activate/%s",
                     user.getUsername(),
                     user.getActivationCode()
             );
-            mailSenderService.send(user.getEmail(), "ActivatonCode", message);
+            mailSenderService.send(user.getEmail(), "Activation code", message);
         }
     }
 

@@ -23,8 +23,8 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
 
-//    @Email(message = "Email is nor correct")
-//    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Email is nor correct")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
     private String activationCode;
 
