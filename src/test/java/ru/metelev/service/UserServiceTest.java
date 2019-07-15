@@ -1,6 +1,6 @@
 package ru.metelev.service;
 
-import com.oracle.webservices.internal.api.message.PropertySet;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;

@@ -40,7 +40,7 @@ public class MainControllerTest {
         this.mockMvc.perform(get("/main"))
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(xpath("//div[@id='navbarSupportedContent']/div").string("a"));
+                .andExpect(xpath("//*[@id='navbarSupportedContent']/div").string("a"));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class MainControllerTest {
         this.mockMvc.perform(get("/main"))
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(xpath("//div[@id='message-list']/div").nodeCount(3));
+                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(3));
     }
 
     @Test
@@ -56,9 +56,9 @@ public class MainControllerTest {
         this.mockMvc.perform(get("/main").param("filter", "smtag"))
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(xpath("//div[@id='message-list']/div").nodeCount(2))
-                .andExpect(xpath("//div[@id='message-list']/div[@data-id=1]").exists())
-                .andExpect(xpath("//div[@id='message-list']/div[@data-id=2]").exists());
+                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(2))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='1']").exists())
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id='2']").exists());
     }
 
     @Test
@@ -71,10 +71,10 @@ public class MainControllerTest {
         this.mockMvc.perform(multipart)
                 .andDo(print())
                 .andExpect(authenticated())
-                .andExpect(xpath("//div[@id='message-list']/div").nodeCount(4))
-                .andExpect(xpath("//div[@id='message-list']/div[@data-id=10]").exists())
-                .andExpect(xpath("//div[@id='message-list']/div[@data-id=10]/div/span").string("fifth"))
-                .andExpect(xpath("//div[@id='message-list']/div[@data-id=10]/div/i").string("new Tag"));
+                .andExpect(xpath("//*[@id='message-list']/div").nodeCount(4))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id=10]").exists())
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id=10]/div/span").string("fifth"))
+                .andExpect(xpath("//*[@id='message-list']/div[@data-id=10]/div/i").string("new Tag"));
     }
 
 
