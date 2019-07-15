@@ -1,8 +1,8 @@
 package ru.metelev.controller;
 
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -18,7 +18,6 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.metelev.domain.Message;
 import ru.metelev.domain.User;
-import ru.metelev.domain.dto.MessageDto;
 import ru.metelev.repos.MessageRepo;
 import ru.metelev.service.MessageService;
 
@@ -53,7 +52,7 @@ public class MainController {
             @PageableDefault(sort = { "id" }, direction = Sort.Direction.DESC) Pageable pageable,
             @AuthenticationPrincipal User user
     ) {
-        Page<MessageDto> page = messageService.messageList(pageable,filter, user);
+        val page = messageService.messageList(pageable,filter, user);
 
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
@@ -84,8 +83,8 @@ public class MainController {
             model.addAttribute("message", null);
             messageRepo.save(message);
         }
-        Iterable<Message> messages = messageRepo.findAll();
-        Page<MessageDto> page = messageRepo.findAll(pageable, user);
+        val messages = messageRepo.findAll();
+        val page = messageRepo.findAll(pageable, user);
         model.addAttribute("messages", messages);
         model.addAttribute("url", "/main");
         model.addAttribute("page", page);
@@ -117,7 +116,7 @@ public class MainController {
             @RequestParam(required = false) Message message,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<MessageDto> page = messageService.messageListForUser(pageable, currentUser, author);
+        val page = messageService.messageListForUser(pageable, currentUser, author);
 
         model.addAttribute("userChannel", author);
         model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
